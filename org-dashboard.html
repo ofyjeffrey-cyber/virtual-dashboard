@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>虛擬公司儀表板</title>
+  <style>
+    :root {
+      color-scheme: light;
+    }
+    body {
+      font-family: "Noto Sans TC", "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #f5f7fb;
+      color: #1c1f23;
+    }
+    h1 {
+      margin-top: 0;
+    }
+    section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #e2e8f0;
+      padding: 0.75rem;
+      text-align: left;
+    }
+    th {
+      background: #edf2ff;
+      font-weight: 600;
+    }
+    .status {
+      font-size: 1.1rem;
+    }
+    ul {
+      margin: 0.25rem 0 0.25rem 1.25rem;
+    }
+    .legend span {
+      display: inline-block;
+      margin-right: 1rem;
+    }
+    code {
+      background: #f1f5f9;
+      padding: 0.15rem 0.4rem;
+      border-radius: 6px;
+      font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+    }
+    #chat-box {
+      display: grid;
+      gap: 1rem;
+    }
+    #chat-log {
+      max-height: 320px;
+      overflow-y: auto;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 1rem;
+      background: #fdfdfd;
+    }
+    .chat-entry {
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #e7edf6;
+    }
+    .chat-entry:last-child {
+      border-bottom: none;
+    }
+    label {
+      font-weight: 600;
+    }
+    textarea {
+      width: 100%;
+      min-height: 80px;
+      border-radius: 8px;
+      border: 1px solid #cbd5f5;
+      padding: 0.75rem;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+    select, button {
+      font-size: 1rem;
+      padding: 0.6rem 0.9rem;
+      border-radius: 8px;
+      border: 1px solid #cbd5f5;
+      font-family: inherit;
+    }
+    button {
+      background: #3b82f6;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <h1>虛擬公司儀表板</h1>
+  <p><em>最後更新：2026-02-20 04:05 UTC</em></p>
+
+  <section>
+    <h2>總覽</h2>
+    <ul>
+      <li><strong>公司使命：</strong> 打造高端紋繡 / 美容服務，輸出行銷 know-how，並以自動化 BTC 策略增值資金。</li>
+      <li><strong>部門：</strong>
+        <ol>
+          <li>美容（紋繡）部門 — 5 位虛擬夥伴</li>
+          <li>網路行銷代操部門 — 2 位虛擬夥伴</li>
+          <li>現金流 / BTC 交易部門 — 1 位虛擬夥伴</li>
+        </ol>
+      </li>
+    </ul>
+    <p class="legend"><strong>狀態圖例：</strong>
+      <span>🟢 進行中</span>
+      <span>🟡 施工中</span>
+      <span>⚪ 待啟動</span>
+      <span>🔴 卡關</span>
+    </p>
+  </section>
+
+  <section>
+    <h2>部門一：美容（紋繡）</h2>
+    <table>
+      <tr>
+        <th>角色代號</th>
+        <th>姓名</th>
+        <th>職稱</th>
+        <th>核心任務</th>
+        <th>當前重點</th>
+        <th>KPI</th>
+        <th>狀態</th>
+      </tr>
+      <tr>
+        <td>B-01</td>
+        <td><strong>陳芮絲 Iris</strong></td>
+        <td>市場情報長</td>
+        <td>追蹤紋繡趨勢、定價、客群</td>
+        <td>每週競業摘要</td>
+        <td>月度需求指數、客群洞察</td>
+        <td class="status">🟢</td>
+      </tr>
+      <tr>
+        <td>B-02</td>
+        <td><strong>吳洛 Leo</strong></td>
+        <td>數位佈局架構師</td>
+        <td>網站、漏斗、SEO、CRM</td>
+        <td>雙語預約站 + 表單</td>
+        <td>轉換率 &gt;4%、SEO 前 5</td>
+        <td class="status">🟡</td>
+      </tr>
+      <tr>
+        <td>B-03</td>
+        <td><strong>唐米亞 Mia</strong></td>
+        <td>內容與文案策劃</td>
+        <td>部落格 / IG / EDM 腳本</td>
+        <td>3 月「自癒美」主題系列</td>
+        <td>每週內容節奏、Lead CTR</td>
+        <td class="status">🟢</td>
+      </tr>
+      <tr>
+        <td>B-04</td>
+        <td><strong>林奕凡 Evan</strong></td>
+        <td>影像製作人</td>
+        <td>術前術後影片、證言</td>
+        <td>每週 3 支 Reels</td>
+        <td>平均觀看 &gt;18 秒、粉絲成長</td>
+        <td class="status">🟡</td>
+      </tr>
+      <tr>
+        <td>B-05</td>
+        <td><strong>高書妃 Sophie</strong></td>
+        <td>營運與人才 Lead</td>
+        <td>SOP、培訓、展店計畫</td>
+        <td>SOP v1 + 訓練教材</td>
+        <td>SOP 完成度、上線率</td>
+        <td class="status">⚪</td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>部門二：網路行銷代操</h2>
+    <table>
+      <tr>
+        <th>角色代號</th>
+        <th>姓名</th>
+        <th>職稱</th>
+        <th>核心任務</th>
+        <th>當前重點</th>
+        <th>KPI</th>
+        <th>狀態</th>
+      </tr>
+      <tr>
+        <td>M-01</td>
+        <td><strong>黃維克 Victor</strong></td>
+        <td>產業策略顧問</td>
+        <td>客戶研究、GTM、簡報</td>
+        <td>「Beauty Flywheel」案例</td>
+        <td>提案勝率、客戶 NPS</td>
+        <td class="status">🟢</td>
+      </tr>
+      <tr>
+        <td>M-02</td>
+        <td><strong>羅雅達 Ada</strong></td>
+        <td>META 廣告暨未來媒體規劃</td>
+        <td>FB/IG/Threads 投放、媒體策略</td>
+        <td>UGC + Advantage+ 測試、Q2 佈局</td>
+        <td>ROAS &gt;3.5、CAC 達標</td>
+        <td class="status">🟡</td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>部門三：現金流 / BTC 自動交易</h2>
+    <table>
+      <tr>
+        <th>角色代號</th>
+        <th>姓名</th>
+        <th>職稱</th>
+        <th>核心任務</th>
+        <th>當前重點</th>
+        <th>KPI</th>
+        <th>狀態</th>
+      </tr>
+      <tr>
+        <td>C-01</td>
+        <td><strong>曾諾亞 Noah</strong></td>
+        <td>量化營運與風控管理</td>
+        <td>維護 BTC 自動化、風控、報告</td>
+        <td>完成資料收集 + 模擬帳本</td>
+        <td>日 P&amp;L、回撤 &lt;50%、告警 SLA</td>
+        <td class="status">🟡</td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>跨部門協作</h2>
+    <ol>
+      <li><strong>美容 → 行銷代操：</strong> Iris 與 Victor 共編「PMU Insights」。</li>
+      <li><strong>行銷代操 → 美容：</strong> Ada 每週五分享 META 投放洞察。</li>
+      <li><strong>BTC → 總部：</strong> Noah 在 Telegram 匯報損益 / 停單 / 重啟建議。</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>即期里程碑</h2>
+    <table>
+      <tr>
+        <th>日期 (UTC)</th>
+        <th>項目</th>
+        <th>負責人</th>
+        <th>備註</th>
+      </tr>
+      <tr>
+        <td>2/21</td>
+        <td>美容預約官網 Soft Launch</td>
+        <td>Leo + Mia</td>
+        <td>Evan 提供影片素材</td>
+      </tr>
+      <tr>
+        <td>2/22</td>
+        <td>行銷代操案例簡報</td>
+        <td>Victor</td>
+        <td>引用美容部門 KPI</td>
+      </tr>
+      <tr>
+        <td>2/23</td>
+        <td>BTC 模擬系統 Demo</td>
+        <td>Noah</td>
+        <td>取決於資料管線進度</td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>資料連結</h2>
+    <ul>
+      <li>美容作業資料夾：<code>/projects/beauty-pmu/</code></li>
+      <li>行銷提案資料夾：<code>/projects/agency/</code></li>
+      <li>BTC 系統設計：<code>/home/ubuntu/.openclaw/workspace/btc-trading-technical-plan.md</code></li>
+      <li>交易日誌（即將建立）：<code>/home/ubuntu/.openclaw/workspace/btc-record.pdf</code></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>與虛擬員工的對話紀錄</h2>
+    <div id="chat-box">
+      <div>
+        <label for="staff-select">選擇對象：</label>
+        <select id="staff-select"></select>
+      </div>
+      <div>
+        <label for="chat-input">交代內容 / 對話：</label>
+        <textarea id="chat-input" placeholder="輸入想交代的任務、回饋或討論...（資料僅儲存在本機瀏覽器）"></textarea>
+      </div>
+      <button id="send-btn">新增紀錄</button>
+      <div>
+        <label>歷史對話：</label>
+        <div id="chat-log"></div>
+      </div>
+      <button id="clear-btn" style="background:#ef4444">清除目前對象紀錄</button>
+    </div>
+    <p style="font-size:0.9rem;color:#64748b;margin-top:1rem;">＊此對話紀錄儲存在瀏覽器 LocalStorage，只能由你這台電腦查看；若要跨裝置同步，建議配合雲端工具。</p>
+  </section>
+
+  <section>
+    <blockquote>
+      這份儀表板是動態文件，請每日更新狀態與里程碑，並透過上方對話框留下指示或紀錄。
+    </blockquote>
+  </section>
+
+  <script>
+    const staffList = [
+      { id: 'B-01', name: '陳芮絲 Iris' },
+      { id: 'B-02', name: '吳洛 Leo' },
+      { id: 'B-03', name: '唐米亞 Mia' },
+      { id: 'B-04', name: '林奕凡 Evan' },
+      { id: 'B-05', name: '高書妃 Sophie' },
+      { id: 'M-01', name: '黃維克 Victor' },
+      { id: 'M-02', name: '羅雅達 Ada' },
+      { id: 'C-01', name: '曾諾亞 Noah' }
+    ];
+
+    const staffSelect = document.getElementById('staff-select');
+    const chatInput = document.getElementById('chat-input');
+    const chatLog = document.getElementById('chat-log');
+    const sendBtn = document.getElementById('send-btn');
+    const clearBtn = document.getElementById('clear-btn');
+
+    staffList.forEach(staff => {
+      const option = document.createElement('option');
+      option.value = staff.id;
+      option.textContent = `${staff.id} — ${staff.name}`;
+      staffSelect.appendChild(option);
+    });
+
+    function getKey() {
+      return `virtual-staff-chat-${staffSelect.value}`;
+    }
+
+    function renderChat() {
+      const records = JSON.parse(localStorage.getItem(getKey()) || '[]');
+      chatLog.innerHTML = '';
+      if (!records.length) {
+        chatLog.innerHTML = '<p style="color:#94a3b8;">尚無紀錄，開始輸入一筆吧。</p>';
+        return;
+      }
+      records.forEach(entry => {
+        const div = document.createElement('div');
+        div.className = 'chat-entry';
+        div.innerHTML = `<strong>${entry.time}</strong><br>${entry.text}`;
+        chatLog.appendChild(div);
+      });
+    }
+
+    staffSelect.addEventListener('change', renderChat);
+
+    sendBtn.addEventListener('click', () => {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      const key = getKey();
+      const records = JSON.parse(localStorage.getItem(key) || '[]');
+      const timestamp = new Date().toLocaleString('zh-TW');
+      records.unshift({ time: timestamp, text });
+      localStorage.setItem(key, JSON.stringify(records.slice(0, 100)));
+      chatInput.value = '';
+      renderChat();
+    });
+
+    clearBtn.addEventListener('click', () => {
+      if (confirm('確定要刪除這位夥伴的所有對話紀錄嗎？')) {
+        localStorage.removeItem(getKey());
+        renderChat();
+      }
+    });
+
+    renderChat();
+  </script>
+</body>
+</html>
