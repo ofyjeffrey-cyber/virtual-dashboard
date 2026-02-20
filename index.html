@@ -14,9 +14,7 @@
       background: #f5f7fb;
       color: #1c1f23;
     }
-    h1 {
-      margin-top: 0;
-    }
+    h1 { margin-top: 0; }
     section {
       background: #fff;
       border-radius: 12px;
@@ -35,26 +33,8 @@
       text-align: left;
       vertical-align: top;
     }
-    th {
-      background: #edf2ff;
-      font-weight: 600;
-    }
-    .status {
-      font-size: 1.1rem;
-    }
-    ul {
-      margin: 0.25rem 0 0.25rem 1.25rem;
-    }
-    .legend span {
-      display: inline-block;
-      margin-right: 1rem;
-    }
-    code {
-      background: #f1f5f9;
-      padding: 0.15rem 0.4rem;
-      border-radius: 6px;
-      font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
-    }
+    th { background: #edf2ff; font-weight: 600; }
+    .legend span { display: inline-block; margin-right: 1rem; }
     .card-grid {
       display: grid;
       gap: 1rem;
@@ -71,62 +51,27 @@
       flex-direction: column;
       gap: 0.5rem;
     }
-    .staff-card h3 {
-      margin: 0;
-      font-size: 1.15rem;
-    }
-    .badge {
-      display: inline-block;
-      padding: 0.15rem 0.5rem;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      color: #fff;
-    }
+    .staff-card h3 { margin: 0; font-size: 1.15rem; }
+    .badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 999px; font-size: 0.8rem; color: #fff; }
     .badge-green { background: #22c55e; }
-    .badge-yellow { background: #facc15; color: #1f2937; }
+    .badge-yellow { background: #facc15; color:#1f2937; }
     .badge-gray { background: #94a3b8; }
-    .badge-red { background: #ef4444; }
-    .progress-log {
-      font-size: 0.9rem;
-      color: #475569;
-    }
-    .input-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-    textarea, input[type="text"] {
-      width: 100%;
-      border-radius: 8px;
-      border: 1px solid #cbd5f5;
-      padding: 0.65rem;
-      font-family: inherit;
-      font-size: 0.95rem;
-      background: #f8fafc;
+    .progress-log { font-size: 0.9rem; color: #475569; }
+    .input-stack { display: flex; flex-direction: column; gap: 0.4rem; }
+    textarea, input[type="text"], select {
+      width: 100%; border-radius: 8px; border: 1px solid #cbd5f5; padding: 0.65rem;
+      font-family: inherit; font-size: 0.95rem; background: #f8fafc;
     }
     .mini-btn {
-      align-self: flex-start;
-      padding: 0.45rem 0.8rem;
-      border-radius: 6px;
-      border: none;
-      background: #3b82f6;
-      color: #fff;
-      font-size: 0.85rem;
-      cursor: pointer;
+      align-self: flex-start; padding: 0.45rem 0.8rem; border-radius: 6px;
+      border: none; background: #3b82f6; color: #fff; font-size: 0.85rem; cursor: pointer;
     }
     .mini-btn:hover { background: #2563eb; }
-    .progress-bar {
-      width: 100%;
-      height: 6px;
-      background: #e2e8f0;
-      border-radius: 999px;
-      overflow: hidden;
-    }
-    .progress-bar span {
-      display: block;
-      height: 100%;
-      background: linear-gradient(90deg, #3b82f6, #0ea5e9);
-    }
+    .progress-bar { width: 100%; height: 6px; background: #e2e8f0; border-radius: 999px; overflow: hidden; }
+    .progress-bar span { display:block; height:100%; background: linear-gradient(90deg,#3b82f6,#0ea5e9); }
+    #global-log { max-height: 360px; overflow-y: auto; border:1px solid #e2e8f0; border-radius:12px; padding:1rem; background:#fdfdfd; }
+    .chat-entry { margin-bottom:1rem; padding-bottom:0.5rem; border-bottom:1px solid #e7edf6; }
+    .chat-entry:last-child { border-bottom:none; }
   </style>
 </head>
 <body>
@@ -149,14 +94,24 @@
       <span>🟢 進行中</span>
       <span>🟡 施工中</span>
       <span>⚪ 待啟動</span>
-      <span>🔴 卡關</span>
     </p>
   </section>
 
   <section>
-    <h2>即時狀態卡（可交辦 / 回覆）</h2>
+    <h2>交辦 / 回覆狀態卡</h2>
     <div class="card-grid" id="staff-cards"></div>
-    <p style="font-size:0.85rem;color:#94a3b8;margin-top:0.8rem;">＊交辦 / 回覆內容儲存在你本機的瀏覽器 LocalStorage。如需跨裝置同步，請手動匯出或改用雲端工具。</p>
+    <p style="font-size:0.85rem;color:#94a3b8;margin-top:0.8rem;">＊交談紀錄暫存於本機瀏覽器 LocalStorage，僅此裝置可見。</p>
+  </section>
+
+  <section>
+    <h2>團體會議即時對話</h2>
+    <div class="input-stack" style="max-width:600px;">
+      <label>選擇對象（可選部門或單一成員）：</label>
+      <select id="global-target"></select>
+      <textarea id="global-message" placeholder="輸入會議指示或紀錄"></textarea>
+      <button class="mini-btn" id="global-send">新增到對話框</button>
+    </div>
+    <div id="global-log" style="margin-top:1rem;"></div>
   </section>
 
   <section>
@@ -198,32 +153,16 @@
     </table>
   </section>
 
-  <section>
-    <h2>資料連結</h2>
-    <ul>
-      <li>美容作業資料夾：<code>/projects/beauty-pmu/</code></li>
-      <li>行銷提案資料夾：<code>/projects/agency/</code></li>
-      <li>BTC 系統設計：<code>/home/ubuntu/.openclaw/workspace/btc-trading-technical-plan.md</code></li>
-      <li>交易日誌（即將建立）：<code>/home/ubuntu/.openclaw/workspace/btc-record.pdf</code></li>
-    </ul>
-  </section>
-
-  <section>
-    <blockquote>
-      這份儀表板是動態文件，請每日更新狀態與里程碑，並在上方狀態卡內交辦或記錄回覆。
-    </blockquote>
-  </section>
-
   <script>
     const staffList = [
-      { id: 'B-01', name: '陳芮絲 Iris', title: '市場情報長', baseStatus: '🟢 進行中' },
-      { id: 'B-02', name: '吳洛 Leo', title: '數位佈局架構師', baseStatus: '🟡 施工中' },
-      { id: 'B-03', name: '唐米亞 Mia', title: '內容與文案策劃', baseStatus: '🟢 進行中' },
-      { id: 'B-04', name: '林奕凡 Evan', title: '影像製作人', baseStatus: '🟡 施工中' },
-      { id: 'B-05', name: '高書妃 Sophie', title: '營運與人才 Lead', baseStatus: '⚪ 待啟動' },
-      { id: 'M-01', name: '黃維克 Victor', title: '產業策略顧問', baseStatus: '🟢 進行中' },
-      { id: 'M-02', name: '羅雅達 Ada', title: 'META 廣告規劃', baseStatus: '🟡 施工中' },
-      { id: 'C-01', name: '曾諾亞 Noah', title: '量化營運與風控', baseStatus: '🟡 施工中' },
+      { id: 'B-01', name: '陳芮絲 Iris', title: '市場情報長', dept: '美容', baseStatus: '🟢 進行中' },
+      { id: 'B-02', name: '吳洛 Leo', title: '數位佈局架構師', dept: '美容', baseStatus: '🟡 施工中' },
+      { id: 'B-03', name: '唐米亞 Mia', title: '內容與文案策劃', dept: '美容', baseStatus: '🟢 進行中' },
+      { id: 'B-04', name: '林奕凡 Evan', title: '影像製作人', dept: '美容', baseStatus: '🟡 施工中' },
+      { id: 'B-05', name: '高書妃 Sophie', title: '營運與人才 Lead', dept: '美容', baseStatus: '⚪ 待啟動' },
+      { id: 'M-01', name: '黃維克 Victor', title: '產業策略顧問', dept: '網路行銷代操', baseStatus: '🟢 進行中' },
+      { id: 'M-02', name: '羅雅達 Ada', title: 'META 廣告規劃', dept: '網路行銷代操', baseStatus: '🟡 施工中' },
+      { id: 'C-01', name: '曾諾亞 Noah', title: '量化營運與風控', dept: '現金流 / BTC', baseStatus: '🟡 施工中' },
     ];
 
     const cardsRoot = document.getElementById('staff-cards');
@@ -233,7 +172,7 @@
       card.className = 'staff-card';
       card.dataset.staffId = staff.id;
       card.innerHTML = `
-        <h3>${staff.name} <small style="color:#94a3b8;font-weight:400;">${staff.title}</small></h3>
+        <h3>${staff.name} <small style="color:#94a3b8;font-weight:400;">${staff.title}｜${staff.dept}</small></h3>
         <div class="progress-log">
           <div>狀態指示：<span class="badge badge-gray" data-status="${staff.id}">${staff.baseStatus}</span></div>
           <div>目前進度：<span data-progress="${staff.id}">尚未更新</span></div>
@@ -249,7 +188,7 @@
         </div>
         <div class="input-stack">
           <label>員工回覆：</label>
-          <textarea data-reply-input="${staff.id}" placeholder="代入他們的回覆 / 會報內容"></textarea>
+          <textarea data-reply-input="${staff.id}" placeholder="代入 ${staff.name} 的回覆 / 會報內容"></textarea>
           <button class="mini-btn" data-reply-btn="${staff.id}">儲存回覆</button>
         </div>
         <div class="progress-log">
@@ -267,8 +206,28 @@
     }
 
     function formatNow() {
-      const date = new Date();
-      return date.toLocaleString('zh-TW');
+      return new Date().toLocaleString('zh-TW');
+    }
+
+    function logGlobal(message) {
+      const key = 'virtual-dashboard-global-log';
+      const logs = JSON.parse(localStorage.getItem(key) || '[]');
+      logs.unshift(message);
+      localStorage.setItem(key, JSON.stringify(logs.slice(0, 200)));
+      renderGlobalLog();
+    }
+
+    function renderGlobalLog() {
+      const key = 'virtual-dashboard-global-log';
+      const logs = JSON.parse(localStorage.getItem(key) || '[]');
+      const box = document.getElementById('global-log');
+      box.innerHTML = logs.length ? '' : '<p style="color:#94a3b8;">尚無對話紀錄</p>';
+      logs.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'chat-entry';
+        div.innerHTML = `<strong>${item.time}｜${item.target}</strong><br>${item.text}`;
+        box.appendChild(div);
+      });
     }
 
     function renderLogs(staffId) {
@@ -332,10 +291,12 @@
         if (!text) return;
         const progress = Number(progressInput.value) || 0;
         const log = JSON.parse(localStorage.getItem(storageKey('assign', staff.id)) || '[]');
-        log.unshift({ time: formatNow(), text, progress: Math.max(0, Math.min(progress, 100)) });
+        const entry = { time: formatNow(), text, progress: Math.max(0, Math.min(progress, 100)), actor: '指示' };
+        log.unshift(entry);
         localStorage.setItem(storageKey('assign', staff.id), JSON.stringify(log.slice(0, 20)));
         assignInput.value = '';
         progressInput.value = '';
+        logGlobal({ time: entry.time, target: `${staff.name}（${staff.id}）`, text: `交辦：${text}｜進度 ${entry.progress}%` });
         renderLogs(staff.id);
       });
 
@@ -343,14 +304,50 @@
         const text = replyInput.value.trim();
         if (!text) return;
         const log = JSON.parse(localStorage.getItem(storageKey('reply', staff.id)) || '[]');
-        log.unshift({ time: formatNow(), text });
+        const entry = { time: formatNow(), text: `${staff.name}：${text}` };
+        log.unshift(entry);
         localStorage.setItem(storageKey('reply', staff.id), JSON.stringify(log.slice(0, 20)));
         replyInput.value = '';
+        logGlobal({ time: entry.time, target: `${staff.name}（回覆）`, text });
         renderLogs(staff.id);
       });
 
       renderLogs(staff.id);
     });
+
+    // 團體會議下拉選單
+    const globalTarget = document.getElementById('global-target');
+    globalTarget.innerHTML = '<option value="ALL">全部人</option>';
+    ['美容','網路行銷代操','現金流 / BTC'].forEach(dept => {
+      const opt = document.createElement('option');
+      opt.value = `DEPT:${dept}`;
+      opt.textContent = `部門：${dept}`;
+      globalTarget.appendChild(opt);
+    });
+    staffList.forEach(staff => {
+      const opt = document.createElement('option');
+      opt.value = staff.id;
+      opt.textContent = `${staff.id}｜${staff.name}`;
+      globalTarget.appendChild(opt);
+    });
+
+    document.getElementById('global-send').addEventListener('click', () => {
+      const text = document.getElementById('global-message').value.trim();
+      if (!text) return;
+      const targetValue = globalTarget.value;
+      let label = '';
+      if (targetValue === 'ALL') label = '全部人';
+      else if (targetValue.startsWith('DEPT:')) label = targetValue.replace('DEPT:','部門：');
+      else {
+        const staff = staffList.find(s => s.id === targetValue);
+        label = staff ? `${staff.name}（${staff.id}）` : targetValue;
+      }
+      const entry = { time: formatNow(), target: label, text };
+      logGlobal(entry);
+      document.getElementById('global-message').value = '';
+    });
+
+    renderGlobalLog();
   </script>
 </body>
 </html>
